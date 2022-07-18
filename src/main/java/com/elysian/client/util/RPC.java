@@ -5,6 +5,7 @@ import com.elysian.client.Elysian;
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import club.minnced.discord.rpc.DiscordRPC;
+
 import net.minecraft.client.Minecraft;
 
 public class RPC {
