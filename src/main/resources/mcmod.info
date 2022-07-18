@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "frogclient",
+    "name": "FrogClient",
+    "description": "Minecraft 2b2t hacked client",
+    "version": "Beta 1.0",
+    "mcversion": "1.12.2",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["FrogDog"],
+    "credits": "The Forge ,FML guys and me",
+    "logoFile": "frog.png",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
