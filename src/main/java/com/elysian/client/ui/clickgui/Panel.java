@@ -61,7 +61,7 @@ public abstract class Panel implements Labeled {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         RenderMethods.glColor(new Color(255, 255, 255, 255));
-        mc.getTextureManager().bindTexture(new ResourceLocation(Elysian.getInstance().MODID, "textures/watermark.png"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Elysian.getInstance().MODID, "textures/category.png"));
         GlStateManager.translate(getX() + getWidth() - 7, (getY() + 6) - 0.3F, 0.0F);
         GlStateManager.rotate(calculateRotation(angle), 0.0F, 0.0F, 1.0F);
         RenderMethods.drawModalRect(-5, -5, 0.0F, 0.0F, 10, 10, 10, 10, 10.0F, 10.0F);
