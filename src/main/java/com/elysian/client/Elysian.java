@@ -18,9 +18,9 @@ import java.io.File;
 
 @Mod(modid = Elysian.MODID, name = Elysian.NAME, version = Elysian.VERSION)
 public final class Elysian {
-    public static final String MODID = "hecks";
-    public static final String NAME = "Hecks.exe";
-    public static final String VERSION = "0.1.0";
+    public static final String MODID = "elysian";
+    public static final String NAME = "Elysian";
+    public static final String VERSION = "0.1";
     public static final Minecraft mc = Minecraft.getMinecraft();
     public static EventBus EVENT_BUS = MinecraftForge.EVENT_BUS;
     public static Elysian instance = null;
@@ -36,7 +36,7 @@ public final class Elysian {
         EVENT_BUS.register(EventProcessor.INSTANCE);
         instance = this;
 
-        this.directory = new File(System.getProperty("user.home"), "froghecks");
+        this.directory = new File(System.getProperty("user.home"), "elysian");
 
         if (!this.directory.exists()) {
             this.directory.mkdir();
