@@ -104,7 +104,7 @@ jar {
                 'MixinConfigs': 'mixins.elysian.json',
                 'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
-                'FMLAT': 'hecks_at.cfg'
+                'FMLAT': 'elysian_at.cfg'
         )
     }
 }
