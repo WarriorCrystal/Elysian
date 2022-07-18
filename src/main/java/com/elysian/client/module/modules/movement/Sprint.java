@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public final class Sprint extends ToggleableModule {
 
     public Sprint() {
-        super("Sprint", new String[] {"sprint", "togglesprint"}, "Sprints automatically", ModuleType.PLAYER);
+        super("Sprint", new String[] {"sprint", "togglesprint"}, "Sprints automatically", ModuleType.MOVEMENT);
         this.offerProperties(this.keybind);
     }
 
