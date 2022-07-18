@@ -58,6 +58,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new KillAura());
         register(new ReverseStep());
         register(new AutoSalDupe());
+        register(new ThunderKill());
 
         Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_RSHIFT);
 
