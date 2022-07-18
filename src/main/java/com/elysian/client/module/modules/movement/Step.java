@@ -15,8 +15,8 @@ public final class Step extends ToggleableModule {
 
 
     public Step() {
-        super("Step", new String[]{"Step"}, "Steping", ModuleType.PLAYER);
-        this.offerProperties(this.vanilla, this.noliquid, this.turnoff);
+        super("Step", new String[]{"Step"}, "Steping", ModuleType.MOVEMENT);
+        this.offerProperties(this.vanilla, this.noliquid, this.turnoff, this.height);
         this.offerProperties(this.keybind);
         }
 }

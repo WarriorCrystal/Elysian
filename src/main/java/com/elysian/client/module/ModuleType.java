@@ -6,7 +6,7 @@ public enum ModuleType implements Labeled {
     COMBAT("Combat"),
     EXPLOIT("Exploit"),
     MISC("Misc"),
-    PLAYER("Player"),
+    MOVEMENT("Movement"),
     RENDER("Render");
 
     private String label;
