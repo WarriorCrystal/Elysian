@@ -2,59 +2,76 @@ package com.elysian.client.module.modules.movement;
 
 import com.elysian.client.module.ModuleType;
 import com.elysian.client.module.ToggleableModule;
-import com.elysian.client.property.NumberProperty;
 
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public final class Strafe extends ToggleableModule {
-    private final NumberProperty<Double> speed = new NumberProperty<Double>(0.5, 0.0, 3.0, "Speed");
+
+    int waitCounter;
+    int forward;
 
     public Strafe() {
-        super("Strafe", new String[]{"strafe"}, "Bhop with a fancy name", ModuleType.MOVEMENT);
-        this.offerProperties(this.speed, this.keybind);
+        super("Strafe", new String[]{"strafe"}, "Warrior Strafe, works on 2B2T", ModuleType.MOVEMENT);
+        this.offerProperties(this.keybind);
+        forward = 1;
     }
 
     @Override
     public void update(TickEvent event) {
-        if (mc.player.onGround) {
-            if (mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown()) {
-                mc.player.jump();
-                double[] direction = directionSpeed(speed.getValue());
-                mc.player.motionX = direction[0];
-                mc.player.motionZ = direction[1];
-
+        boolean boost;
+        boolean bl = boost = Math.abs(mc.player.rotationYawHead - mc.player.rotationYaw) < 90.0f;
+        if (mc.player.moveForward != 0.0f) {
+            if (!mc.player.isSprinting()) {
+                mc.player.setSprinting(true);
+            }
+            float yaw = mc.player.rotationYaw;
+            if (mc.player.moveForward > 0.0f) {
+                if (mc.player.movementInput.moveStrafe != 0.0f) {
+                    yaw += mc.player.movementInput.moveStrafe > 0.0f ? -45.0f : 45.0f;
+                }
+                this.forward = 1;
+                mc.player.moveForward = 1.0f;
+                mc.player.moveStrafing = 0.0f;
+            } else if (mc.player.moveForward < 0.0f) {
+                if (mc.player.movementInput.moveStrafe != 0.0f) {
+                    yaw += mc.player.movementInput.moveStrafe > 0.0f ? 45.0f : -45.0f;
+                }
+                this.forward = -1;
+                mc.player.moveForward = -1.0f;
+                mc.player.moveStrafing = 0.0f;
+            }
+            if (mc.player.onGround) {
+                mc.player.setJumping(false);
+                if (this.waitCounter < 1) {
+                    ++this.waitCounter;
+                    return;
+                }
+                this.waitCounter = 0;
+                float f = (float)Math.toRadians(yaw);
+                mc.player.motionY = 0.4;
+                EntityPlayerSP player = mc.player;
+                player.motionX -= (double)(MathHelper.sin((float)f) * 0.195f) * (double)this.forward;
+                EntityPlayerSP player2 = mc.player;
+                player2.motionZ += (double)(MathHelper.cos((float)f) * 0.195f) * (double)this.forward;
             }
         } else {
-            double[] direction = directionSpeed(0.26);
-            mc.player.motionX = direction[0];
-            mc.player.motionZ = direction[1];
-        }
-    }
-
-    private double[] directionSpeed(double speed) {
-        float forward = mc.player.movementInput.moveForward;
-        float side = mc.player.movementInput.moveStrafe;
-        float yaw = mc.player.prevRotationYaw + (mc.player.rotationYaw - mc.player.prevRotationYaw) * mc.getRenderPartialTicks();
-
-        if (forward != 0) {
-            if (side > 0) {
-                yaw += (forward > 0 ? -45 : 45);
-            } else if (side < 0) {
-                yaw += (forward > 0 ? 45 : -45);
+            double speed;
+            if (this.waitCounter < 1) {
+                ++this.waitCounter;
+                return;
             }
-            side = 0;
-
-            if (forward > 0) {
-                forward = 1;
-            } else if (forward < 0) {
-                forward = -1;
+            this.waitCounter = 0;
+            double currentSpeed = Math.sqrt(mc.player.motionX * mc.player.motionX + mc.player.motionZ * mc.player.motionZ);
+            double d = speed = boost ? 1.0034 : 1.001;
+            if (mc.player.motionY < 0.0) {
+                speed = 1.0;
             }
+            double yaw = 0.0;
+            double direction = Math.toRadians(yaw);
+            mc.player.motionX = -Math.sin(direction) * speed * currentSpeed * (double)this.forward;
+            mc.player.motionZ = Math.cos(direction) * speed * currentSpeed * (double)this.forward;
         }
-
-        final double sin = Math.sin(Math.toRadians(yaw + 90));
-        final double cos = Math.cos(Math.toRadians(yaw + 90));
-        final double posX = (forward * speed * cos + side * speed * sin);
-        final double posZ = (forward * speed * sin - side * speed * cos);
-        return new double[]{posX, posZ};
     }
 }
