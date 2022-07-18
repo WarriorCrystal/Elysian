@@ -56,8 +56,9 @@ public final class ModuleManager extends Registry<Module> {
         //register(new Reach());
         register(new AutoFish());
         register(new KillAura());
+        register(new Step());
 
-        Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_O);
+        Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_RSHIFT);
 
         new Config("module_configurations.json"){
 
