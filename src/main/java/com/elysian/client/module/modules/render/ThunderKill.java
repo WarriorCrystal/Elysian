@@ -14,9 +14,9 @@ import com.elysian.client.module.ModuleType;
 
 public class ThunderKill extends ToggleableModule {
     private final Property<Boolean> thunder = new Property<Boolean>(true, "Thunder", "thunder");
-    private final NumberProperty<Integer> thunderAmount = new NumberProperty<Integer>(1, 1, 10, "Thunder Amount");
+    private final NumberProperty<Integer> thunderAmount = new NumberProperty<Integer>(1, 1, 10, "Thunders");
     private final Property<Boolean> sound = new Property<Boolean>(true, "Sound", "sound");
-    private final NumberProperty<Integer> soundAmount = new NumberProperty<Integer>(1, 1, 10, "Sound Amount");
+    private final NumberProperty<Integer> soundAmount = new NumberProperty<Integer>(1, 1, 10, "Sounds");
 
 
     public ThunderKill() {

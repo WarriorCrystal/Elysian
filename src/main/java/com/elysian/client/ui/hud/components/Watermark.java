@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 public final class Watermark extends HudComponent {
 
-    private final ResourceLocation watermark = new ResourceLocation(Elysian.getInstance().MODID , "textures/LogoPng.png");
+    private final ResourceLocation watermark = new ResourceLocation(Elysian.getInstance().MODID , "textures/watermark.png");
 
     public Watermark() {
         super("watermark", 10, 15);
