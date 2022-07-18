@@ -66,7 +66,7 @@ public class ModuleButton extends Button {
 
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
-            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Elysian.getInstance().MODID , "textures/watermark.png"));
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Elysian.getInstance().MODID , "textures/module.png"));
             GlStateManager.translate(getX() + getWidth() - 6.7F, getY() + 7.7F - 0.3F, 0.0F);
             GlStateManager.rotate(calculateRotation((float)this.progress), 0.0F, 0.0F, 1.0F);
             RenderMethods.drawModalRect(-5, -5, 0.0F, 0.0F, 10, 10, 10, 10, 10.0F, 10.0F);
