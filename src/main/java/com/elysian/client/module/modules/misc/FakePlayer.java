@@ -18,7 +18,7 @@ public final class FakePlayer extends ToggleableModule {
     @Override
     public void onEnable() {
         super.onEnable();
-        EntityOtherPlayerMP fakePlayer = new EntityOtherPlayerMP(mc.world, new GameProfile(UUID.fromString("0f75a81d-70e5-43c5-b892-f33c524284f2"), mc.player.getName() + "'s Clone"));
+        EntityOtherPlayerMP fakePlayer = new EntityOtherPlayerMP(mc.world, new GameProfile(UUID.fromString("0f75a81d-70e5-43c5-b892-f33c524284f2"), "Hideaki"));
         fakePlayer.copyLocationAndAnglesFrom(mc.player);
         mc.world.addEntityToWorld(-100, fakePlayer);
     }
