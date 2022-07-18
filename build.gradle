@@ -17,8 +17,8 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 version = '0.1.1'
-group = 'me.frogdog.hecks'
-archivesBaseName = 'hecks'
+group = 'com.elysian.client'
+archivesBaseName = 'elysian'
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -28,7 +28,7 @@ compileJava {
 minecraft {
     version = '1.12.2-14.23.5.2768'
     runDir = 'run'
-    coreMod = 'me.frogdog.hecks.mixin.MixinLoader'
+    coreMod = 'com.elysian.client.mixin.MixinLoader'
     mappings = 'stable_39'
     makeObfSourceJar = false
 }
@@ -65,7 +65,7 @@ mixin {
     defaultObfuscationEnv searge
     sourceSets {
         main {
-            ext.refMap = 'mixins.hecks.refmap.json'
+            ext.refMap = 'mixins.elysian.refmap.json'
         }
     }
 }
@@ -100,8 +100,8 @@ jar {
         attributes(
                 'FMLCorePluginContainsFMLMod': 'true',
                 'ForceLoadAsMod': 'true',
-                'FMLCorePlugin': 'me.frogdog.hecks.mixin.MixinLoader',
-                'MixinConfigs': 'mixins.hecks.json',
+                'FMLCorePlugin': 'com.elysian.client.mixin.MixinLoader',
+                'MixinConfigs': 'mixins.elysian.json',
                 'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 'FMLAT': 'hecks_at.cfg'
