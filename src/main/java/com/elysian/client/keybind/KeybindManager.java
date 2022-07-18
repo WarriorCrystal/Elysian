@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import com.elysian.client.Elysian;
 import com.elysian.client.command.Command;
-import com.elysian.client.event.Event;
 import com.elysian.client.event.events.InputEvent;
 import com.elysian.client.module.Module;
 import com.elysian.client.module.ToggleableModule;
 import com.elysian.client.util.Registry;
 import com.elysian.client.util.interfaces.Toggleable;
+import com.mojang.realmsclient.gui.ChatFormatting;
 
 public final class KeybindManager extends Registry<Keybind> {
 
@@ -29,7 +29,12 @@ public final class KeybindManager extends Registry<Keybind> {
                     } else {
                         ToggleableModule toggleableModule = (ToggleableModule)module;
                         toggleableModule.toggle();
-                        Command.sendClientSideMessage(module.getLabel() + " has been set to " + toggleableModule.isRunning());
+                        if(toggleableModule.isRunning()) {
+                            Command.sendClientSideMessage(module.getLabel() + " has been " + ChatFormatting.GREEN + "Enabled");
+                        }
+                        if(!toggleableModule.isRunning()) {
+                            Command.sendClientSideMessage(module.getLabel() + " has been " + ChatFormatting.RED + "Disabled");
+                        }
                     }
                 }
             });
