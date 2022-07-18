@@ -1,4 +1,4 @@
-package com.elysian.client.module.modules.player;
+package com.elysian.client.module.modules.misc;
 
 import com.elysian.client.event.events.PacketEvent;
 import com.elysian.client.module.ModuleType;
@@ -22,7 +22,7 @@ public final class Freecam extends ToggleableModule {
     private Entity ridingEntity;
 
     public Freecam() {
-        super("Freecam", new String[] {"Freecam", "freecam"}, "Spectator mode", ModuleType.PLAYER);
+        super("Freecam", new String[] {"Freecam", "freecam"}, "Spectator mode", ModuleType.MISC);
         this.offerProperties(this.keybind);
     }
 

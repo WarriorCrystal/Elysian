@@ -7,14 +7,13 @@ import com.elysian.client.module.modules.client.*;
 import com.elysian.client.module.modules.combat.*;
 import com.elysian.client.module.modules.exploit.*;
 import com.elysian.client.module.modules.misc.*;
-import com.elysian.client.module.modules.player.*;
+import com.elysian.client.module.modules.movement.*;
 import com.elysian.client.module.modules.render.*;
 import com.elysian.client.util.Registry;
 import com.elysian.client.util.interfaces.Toggleable;
 import com.google.gson.*;
 
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 

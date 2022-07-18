@@ -1,6 +1,5 @@
-package com.elysian.client.module.modules.player;
+package com.elysian.client.module.modules.movement;
 
-import com.elysian.client.event.events.PacketEvent;
 import com.elysian.client.module.ModuleType;
 import com.elysian.client.module.ToggleableModule;
 

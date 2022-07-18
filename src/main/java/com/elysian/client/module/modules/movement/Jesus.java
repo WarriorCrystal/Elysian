@@ -1,4 +1,4 @@
-package com.elysian.client.module.modules.player;
+package com.elysian.client.module.modules.movement;
 
 import com.elysian.client.module.ModuleType;
 import com.elysian.client.module.ToggleableModule;
