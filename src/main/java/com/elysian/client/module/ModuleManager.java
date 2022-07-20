@@ -44,6 +44,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new YawLock());
         register(new AutoTotem());
         register(new FakePlayer());
+        register(new Shrug());
         register(new Jesus());
         register(new VerticalRender());
         register(new SmallOffhand());
