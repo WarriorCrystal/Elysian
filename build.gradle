@@ -41,6 +41,7 @@ repositories {
 }
 
 dependencies {
+    compile('com.github.ionar2:Alpine:1.9f')
     compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         exclude module: 'commons-io'
         exclude module: 'guava'
@@ -53,6 +54,7 @@ dependencies {
 
 shadowJar {
     dependencies {
+        include dependency('com.github.ionar2:Alpine')
         include dependency('club.minnced:java-discord-rpc:2.0.2')
         include dependency('club.minnced:discord-rpc-release:v3.4.0')
         include dependency('org.javassist:javassist')
