@@ -21,7 +21,7 @@ public class Module implements Labeled {
     private final String tooltip;
     private final String[] aliases;
     private final List<Property<?>> properties = new ArrayList<>();
-    protected Minecraft mc = Minecraft.getMinecraft();
+    protected static Minecraft mc = Minecraft.getMinecraft();
 
     protected Module(String label, String[] aliases, String tooltip) {
         this.label = label;
