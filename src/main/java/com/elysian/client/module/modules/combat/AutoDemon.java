@@ -718,13 +718,13 @@ public class AutoDemon extends ToggleableModule {
                 if (selfDamage > maxSelfBreak.getValue()) return 0;
                 if (EntityUtil.getHealth(mc.player) - selfDamage <= 0 && this.antiSuicide.getValue()) return 0;
                 switch (crystalLogic.getValue().toString()) {
-                   /* case "Safe":
+                    case "Safe":
                         return targetDamage - selfDamage;
                     case "Damage":
                         return targetDamage;
                     case "Nearby":
                         double distance = mc.player.getDistanceSq(crystal);
-                        return targetDamage - distance; */
+                        return targetDamage - distance;
                 }
             }
             return 0;
@@ -762,13 +762,13 @@ public class AutoDemon extends ToggleableModule {
                 if (selfDamage > maxSelfPlace.getValue()) return 0;
                 if (EntityUtil.getHealth(mc.player) - selfDamage <= 0 && this.antiSuicide.getValue()) return 0;
                 switch (crystalLogic.getValue().toString()) {
-                  /*  case:
+                    case "Safe":
                         return targetDamage - selfDamage;
                     case "Damage":
                         return targetDamage;
                     case "Nearby":
                         double distance = mc.player.getDistanceSq(blockPos);
-                        return targetDamage - distance;*/
+                        return targetDamage - distance;
                 }
             }
             return 0;
