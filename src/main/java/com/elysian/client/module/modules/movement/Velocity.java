@@ -1,3 +1,4 @@
+/*
 package com.elysian.client.module.modules.movement;
 
 import com.elysian.client.event.events.EventCancellable;
@@ -43,3 +44,4 @@ public class Velocity extends ToggleableModule {
             if (event.get_entity() == mc.player) {
                 event.cancel();
         }
+*/
