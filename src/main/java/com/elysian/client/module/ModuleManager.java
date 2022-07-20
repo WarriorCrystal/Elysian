@@ -44,6 +44,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new YawLock());
         register(new AutoTotem());
         register(new FakePlayer());
+        register(new Shrug());
         register(new Jesus());
         register(new VerticalRender());
         register(new SmallOffhand());
@@ -64,6 +65,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new ManualQuiver());
         register(new GreenChat());
         register(new InventoryMove());
+        register(new TimeChanger());
 
         Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_RSHIFT);
 

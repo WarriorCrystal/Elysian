@@ -38,7 +38,7 @@ public class NumberSlider extends Item {
     }
 
     private void setSettingFromX(int mouseX) {
-        float percent = (mouseX - x) / (width + 7.4F);
+        float percent = (mouseX - x) / (width + 8.2F);
         if (numberProperty.getValue() instanceof Double) {
             double result = (Double)numberProperty.getMinimum() + (difference * percent);
             numberProperty.setValue(Math.round(10.0 * result) / 10.0);
