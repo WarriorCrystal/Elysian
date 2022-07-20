@@ -1,8 +1,6 @@
 package com.elysian.client.module.modules.misc;
 
 
-import com.elysian.client.Elysian;
-import com.elysian.client.command.CommandManager;
 import com.elysian.client.event.events.PacketEvent;
 import com.elysian.client.module.ToggleableModule;
 import com.elysian.client.property.Property;
