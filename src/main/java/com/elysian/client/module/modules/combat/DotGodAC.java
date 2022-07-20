@@ -1,6 +1,5 @@
 package com.elysian.client.module.modules.combat;
 
-import com.elysian.client.util.ModuleManifest;
 import com.elysian.client.accessors.ICPacketUseEntity;
 import com.elysian.client.event.events.PacketEvent;
 import com.elysian.client.event.events.Render3DEvent;
@@ -37,7 +36,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AutoCrystal extends ToggleableModule {
+public class DotGodAC extends ToggleableModule {
 
 
     private final NumberProperty<Integer> enemyRange = new NumberProperty<Integer>(9, 0, 15, "Enemy Range");
@@ -49,8 +48,8 @@ public class AutoCrystal extends ToggleableModule {
     private final NumberProperty<Float> minDamage = new NumberProperty<Float>(4.00f, 0.00f, 20.00f, "Min DMG");
     private final NumberProperty<Float> maxSelf = new NumberProperty<Float>(7.00f, 0.00f, 36.00f, "Max Self");
 
-    public AutoCrystal() {
-        super("ElPepeCrystal", new String[] {"autocrystal"}, "ete sech", ModuleType.COMBAT);
+    public DotGodAC() {
+        super("DotGodAC", new String[] {"DotGodAC"}, "DotGodAC", ModuleType.COMBAT);
         this.offerProperties(enemyRange, delay, placeRange, hitRange, faceplaceHP, minDamage, maxSelf, keybind);
     }
 
