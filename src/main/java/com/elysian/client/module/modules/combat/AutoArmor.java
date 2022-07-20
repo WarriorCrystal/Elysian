@@ -5,6 +5,7 @@ import com.elysian.client.property.NumberProperty;
 import com.elysian.client.property.Property;
 import com.elysian.client.module.ToggleableModule;
 import com.elysian.client.util.FriendUtil;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.Entity;
@@ -33,7 +34,7 @@ public class AutoArmor extends ToggleableModule {
     private int delay_count;
 
     public AutoArmor() {
-        super("AutoArmor", new String[] {"AutoArmor"}, "AutoArmor", ModuleType.COMBAT);
+        super("AutoArmor", new String[] {"AutoA"}, "AA", ModuleType.COMBAT);
         this.offerProperties(Delay, PlayerRange, CrystalRange, BootPercent, ChestPercent, SmartMod, EquipArmour, this.keybind);
     }
     @Override
