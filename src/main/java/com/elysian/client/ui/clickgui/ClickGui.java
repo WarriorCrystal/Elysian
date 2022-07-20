@@ -1,6 +1,9 @@
 package com.elysian.client.ui.clickgui;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.lwjgl.input.Mouse;
 
 import com.elysian.client.Elysian;
 import com.elysian.client.module.Module;
@@ -76,6 +79,20 @@ public final class ClickGui extends GuiScreen {
     public void mouseReleased(int mouseX, int mouseY, int releaseButton) {
         this.panels.forEach(panel -> panel.mouseReleased(mouseX, mouseY, releaseButton));
     }
+
+    public void handleMouseInput() throws IOException {
+		if (Mouse.getEventDWheel() > 0) {
+			for (Panel panels : getPanels()) {
+				panels.setY(panels.getY() + 10);
+			}
+		}
+		if (Mouse.getEventDWheel() < 0) {
+			for (Panel panels : getPanels()) {
+				panels.setY(panels.getY() - 10);
+			}
+		}
+		super.handleMouseInput();
+	}
 
     @Override
     public boolean doesGuiPauseGame() {
