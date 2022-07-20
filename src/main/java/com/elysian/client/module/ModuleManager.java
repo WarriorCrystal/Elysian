@@ -41,7 +41,6 @@ public final class ModuleManager extends Registry<Module> {
         register(new Tracers());
         //register(new KillAura());
         register(new FastPlace());
-        register(new Freecam());
         register(new YawLock());
         register(new AutoTotem());
         register(new FakePlayer());

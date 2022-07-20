@@ -48,19 +48,18 @@ public class AutoCrystal extends ToggleableModule {
     private final NumberProperty<Float> faceplaceHP = new NumberProperty<Float>(8.00f, 0.00f, 36.00f, "FacePlace Hp");
     private final NumberProperty<Float> minDamage = new NumberProperty<Float>(4.00f, 0.00f, 20.00f, "Min DMG");
     private final NumberProperty<Float> maxSelf = new NumberProperty<Float>(7.00f, 0.00f, 36.00f, "Max Self");
-    private final ArrayList<BlockPos> placePositions;
-    private final ArrayList<Entity> predicted;
-    private final ArrayList<Entity> crystals;
-    private final TimerUtil breakTimer;
-    private final TimerUtil timerUtil;
-    private BlockPos renderPos;
-
 
     public AutoCrystal() {
         super("DotGodAC", new String[] {"DotGodAC"}, "DotGodAC", ModuleType.COMBAT);
         this.offerProperties(enemyRange, delay, placeRange, hitRange, faceplaceHP, minDamage, maxSelf, keybind);
     }
 
+    private final ArrayList<BlockPos> placePositions = new ArrayList<>();
+    private final ArrayList<Entity> predicted = new ArrayList<>();
+    private final ArrayList<Entity> crystals = new ArrayList<>();
+    private final TimerUtil breakTimer = new TimerUtil();
+    private final TimerUtil timerUtil = new TimerUtil();
+    private BlockPos renderPos;
 
 
 
@@ -70,19 +69,20 @@ public class AutoCrystal extends ToggleableModule {
             this.placePositions.clear();
             this.crystals.clear();
             this.renderPos = null;
-            this.TimerUtil.reset();
+            breakTimer.reset();
+            this.timerUtil.reset();
         }
         if (!ItemUtil.isHoldingItem(Items.END_CRYSTAL)) {
             return;
         }
-        final EntityPlayer closestEnemy = CombatUtil.getEnemy((float)this.enemyRange);
+        final EntityPlayer closestEnemy = CombatUtil.getEnemy((float)enemyRange.getValue());
         if (closestEnemy == null) {
             this.renderPos = null;
             return;
         }
-        float maxDamage = (EntityUtil.totalHealth(closestEnemy) > this.faceplaceHP) ? this.minDamage : 2.0f;
+        float maxDamage = (EntityUtil.totalHealth(closestEnemy) > faceplaceHP.getValue()) ? this.minDamage.getValue() : 2.0f;
         BlockPos placePos = null;
-        for (final BlockPos pos : BlockUtil.getSphere(this.placeRange)) {
+        for (final BlockPos pos : BlockUtil.getSphere(placeRange.getValue())) {
             if (!this.canPlaceCrystal(pos)) {
                 continue;
             }
@@ -90,31 +90,31 @@ public class AutoCrystal extends ToggleableModule {
             if (targetDamage <= maxDamage) {
                 continue;
             }
-            final float selfDamage = this.calculate(pos, (EntityLivingBase)AutoCrystal.mc.player);
-            if (EntityUtil.totalHealth((EntityPlayer)AutoCrystal.mc.player) - 0.5 <= selfDamage || this.maxSelf <= selfDamage || targetDamage <= selfDamage) {
+            final float selfDamage = this.calculate(pos, (EntityLivingBase)mc.player);
+            if (EntityUtil.totalHealth((EntityPlayer)mc.player) - 0.5 <= selfDamage || this.maxSelf.getValue() <= selfDamage || targetDamage <= selfDamage) {
                 continue;
             }
             maxDamage = targetDamage;
             placePos = pos;
         }
-        for (final Entity crystal : AutoCrystal.mc.world.loadedEntityList) {
+        for (final Entity crystal : mc.world.loadedEntityList) {
             if (crystal instanceof EntityEnderCrystal) {
                 if (this.predicted.contains(crystal)) {
                     return;
                 }
-                if (AutoCrystal.mc.player.getDistance(crystal) > (AutoCrystal.mc.player.canEntityBeSeen(crystal) ? this.hitRange : 3.0f)) {
+                if (mc.player.getDistance(crystal) > (mc.player.canEntityBeSeen(crystal) ? this.hitRange.getValue() : 3.0f)) {
                     continue;
                 }
-                if (this.crystals.contains(crystal) && !this.breakTimer.hasReached((long)this.delay)) {
+                if (this.crystals.contains(crystal) && !this.breakTimer.hasReached((long)this.delay.getValue())) {
                     return;
                 }
-                AutoCrystal.mc.getConnection().sendPacket((Packet)new CPacketUseEntity(crystal));
+                mc.getConnection().sendPacket((Packet)new CPacketUseEntity(crystal));
                 this.crystals.add(crystal);
                 this.breakTimer.reset();
             }
         }
         if (placePos != null) {
-            AutoCrystal.mc.getConnection().sendPacket((Packet)new CPacketPlayerTryUseItemOnBlock(placePos, EnumFacing.UP, (AutoCrystal.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.5f, 1.0f, 0.5f));
+            mc.getConnection().sendPacket((Packet)new CPacketPlayerTryUseItemOnBlock(placePos, EnumFacing.UP, (mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.5f, 1.0f, 0.5f));
             this.placePositions.add(placePos);
             this.renderPos = placePos;
         }
@@ -134,8 +134,8 @@ public class AutoCrystal extends ToggleableModule {
     public void onPacketSend(final PacketEvent.Send event) {
         if (event.getPacket() instanceof CPacketUseEntity) {
             final CPacketUseEntity packet = (CPacketUseEntity)event.getPacket();
-            if (packet.getAction() == CPacketUseEntity.Action.ATTACK && packet.getEntityFromWorld((World)AutoCrystal.mc.world) instanceof EntityEnderCrystal) {
-                AutoCrystal.mc.getConnection().sendPacket((Packet)new CPacketAnimation(EnumHand.MAIN_HAND));
+            if (packet.getAction() == CPacketUseEntity.Action.ATTACK && packet.getEntityFromWorld((World)mc.world) instanceof EntityEnderCrystal) {
+                mc.getConnection().sendPacket((Packet)new CPacketAnimation(EnumHand.MAIN_HAND));
             }
         }
     }
@@ -145,7 +145,7 @@ public class AutoCrystal extends ToggleableModule {
         if (event.getPacket() instanceof SPacketSoundEffect) {
             final SPacketSoundEffect packet = (SPacketSoundEffect)event.getPacket();
             if (packet.getCategory() == SoundCategory.BLOCKS && packet.getSound() == SoundEvents.ENTITY_GENERIC_EXPLODE) {
-                for (final Entity entity : new ArrayList<Entity>(AutoCrystal.mc.world.loadedEntityList)) {
+                for (final Entity entity : new ArrayList<Entity>(mc.world.loadedEntityList)) {
                     if (entity instanceof EntityEnderCrystal && entity.getDistance(packet.getX(), packet.getY(), packet.getZ()) < 4.0) {
                         entity.setDead();
                     }
@@ -159,8 +159,8 @@ public class AutoCrystal extends ToggleableModule {
                 final ICPacketUseEntity packetUseEntity = (ICPacketUseEntity) new CPacketUseEntity();
                 packetUseEntity.setEntityId(id);
                 packetUseEntity.setAction(CPacketUseEntity.Action.ATTACK);
-                AutoCrystal.mc.getConnection().sendPacket((Packet)packetUseEntity);
-                this.predicted.add(AutoCrystal.mc.world.getEntityByID(id));
+                mc.getConnection().sendPacket((Packet)packetUseEntity);
+                this.predicted.add(mc.world.getEntityByID(id));
             }
         }
     }
@@ -174,11 +174,11 @@ public class AutoCrystal extends ToggleableModule {
         if (distance > 1.0) {
             return 0.0f;
         }
-        final double density = AutoCrystal.mc.world.getBlockDensity(new Vec3d(x, y, z), base.getEntityBoundingBox());
+        final double density = mc.world.getBlockDensity(new Vec3d(x, y, z), base.getEntityBoundingBox());
         final double densityDistance;
         distance = (densityDistance = (1.0 - distance) * density);
         float damage = this.getDifficultyMultiplier((float)((densityDistance * densityDistance + distance) / 2.0 * 85.0));
-        final DamageSource damageSource = DamageSource.causeExplosionDamage(new Explosion((World)AutoCrystal.mc.world, (Entity)AutoCrystal.mc.player, x, y, z, 6.0f, false, true));
+        final DamageSource damageSource = DamageSource.causeExplosionDamage(new Explosion((World)mc.world, (Entity)mc.player, x, y, z, 6.0f, false, true));
         damage = CombatRules.getDamageAfterAbsorb(damage, (float)base.getTotalArmorValue(), (float)base.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).getAttributeValue());
         final int modifierDamage = EnchantmentHelper.getEnchantmentModifierDamage(base.getArmorInventoryList(), damageSource);
         if (modifierDamage > 0) {
@@ -193,15 +193,15 @@ public class AutoCrystal extends ToggleableModule {
 
     private boolean canPlaceCrystal(final BlockPos pos) {
         final BlockPos boost = pos.up();
-        if (AutoCrystal.mc.world.getBlockState(boost).getBlock() != Blocks.AIR || !this.checkEntities(boost)) {
+        if (mc.world.getBlockState(boost).getBlock() != Blocks.AIR || !this.checkEntities(boost)) {
             return false;
         }
         final BlockPos boost2 = boost.up();
-        return AutoCrystal.mc.world.getBlockState(boost2).getBlock() == Blocks.AIR && this.checkEntities(boost2);
+        return mc.world.getBlockState(boost2).getBlock() == Blocks.AIR && this.checkEntities(boost2);
     }
 
     private boolean checkEntities(final BlockPos pos) {
-        for (final Object entity : AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(pos))) {
+        for (final Object entity : mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(pos))) {
             if (entity instanceof EntityEnderCrystal) {
                 continue;
             }
@@ -211,7 +211,7 @@ public class AutoCrystal extends ToggleableModule {
     }
 
     private float getDifficultyMultiplier(final float distance) {
-        switch (AutoCrystal.mc.world.getDifficulty()) {
+        switch (mc.world.getDifficulty()) {
             case PEACEFUL: {
                 return 0.0f;
             }
