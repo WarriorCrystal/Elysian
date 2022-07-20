@@ -1,14 +1,12 @@
 package com.elysian.client.module;
 
 import com.elysian.client.Elysian;
-import com.elysian.client.event.EventProcessor;
 import com.elysian.client.event.events.PacketEvent;
 import com.elysian.client.keybind.Keybind;
 import com.elysian.client.property.Property;
 import com.elysian.client.util.interfaces.Toggleable;
 
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class ToggleableModule extends Module implements Toggleable {

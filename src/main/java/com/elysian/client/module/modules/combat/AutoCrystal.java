@@ -1,5 +1,16 @@
 package com.elysian.client.module.modules.combat;
 
+import com.elysian.client.util.Globals;
+import com.elysian.client.util.WurstTimer;
+import com.elysian.client.event.EventStage;
+import com.elysian.client.event.events.PacketEventWurst;
+import com.elysian.client.event.events.UpdateWalkingPlayerEvent;
+import com.elysian.client.event.events.CommitEvent;
+import com.elysian.client.event.events.EventPriority;
+import com.elysian.client.util.Colour;
+import com.elysian.client.util.WurstTimer;
+import com.elysian.client.event.events.Render3DEvent;
+
 import com.elysian.client.module.ModuleExample;
 import com.elysian.client.module.ModuleType;
 import com.elysian.client.module.ToggleableModule;
@@ -7,6 +18,22 @@ import com.elysian.client.property.EnumProperty;
 import com.elysian.client.property.NumberProperty;
 import com.elysian.client.property.Property;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityEnderCrystal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.*;
+import net.minecraft.network.play.client.*;
+import net.minecraft.network.play.server.*;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 public class AutoCrystal extends ToggleableModule {
 
     //ranges
@@ -136,6 +163,7 @@ public class AutoCrystal extends ToggleableModule {
         Offhand,
         None
     }
+
     public AutoCrystal() {
         super("AutoCrystal", new String[] {"AutoCrystal"}, "AutoCrystal", ModuleType.COMBAT);
         this.offerProperties(breakRange, placeRange, breakRangeWall, placeRangeWall, targetRange, placeDelay, breakDelay, sortBlocks, ignoreSelfDamage, minPlace, maxSelfPlace, minBreak, maxSelfBreak, antiSuicide, maxYaw, raytrace, fastMode, autoSwitch, silentSwitchHand, antiWeakness, maxCrystals, ignoreTerrain, crystalLogic, thirteen, attackPacket, packetSafe, noBreakCalcs, arrayListMode, debug, threaded, antiStuck, maxAntiStuckDamage, predictCrystal, predictBlock, predictTeleport, entityPredict, predictedTicks, palceObiFeet, ObiYCheck, rotateObiFeet, timeoutTicksObiFeet, noMP, facePlaceHP, facePlaceDelay, fuckArmourHP, when, mode, fade, fadeTime, flat, height, width, renderDamage, swing, placeSwing, keybind);

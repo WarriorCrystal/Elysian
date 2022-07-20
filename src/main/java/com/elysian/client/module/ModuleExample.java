@@ -1,16 +1,13 @@
 package com.elysian.client.module;
 
-import net.minecraft.tileentity.TileEntityStructure.Mode;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import com.elysian.client.event.events.InputEvent;
 import com.elysian.client.event.events.PacketEvent;
-import com.elysian.client.module.ToggleableModule;
 import com.elysian.client.property.EnumProperty;
 import com.elysian.client.property.NumberProperty;
 import com.elysian.client.property.Property;
-import com.elysian.client.module.ModuleType;
 
 public class ModuleExample extends ToggleableModule {
 
