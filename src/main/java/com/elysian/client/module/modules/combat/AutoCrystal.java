@@ -50,7 +50,7 @@ public class AutoCrystal extends ToggleableModule {
     private final NumberProperty<Float> maxSelf = new NumberProperty<Float>(7.00f, 0.00f, 36.00f, "Max Self");
 
     public AutoCrystal() {
-        super("DotGodAC", new String[] {"DotGodAC"}, "DotGodAC", ModuleType.COMBAT);
+        super("ElPepeCrystal", new String[] {"autocrystal"}, "ete sech", ModuleType.COMBAT);
         this.offerProperties(enemyRange, delay, placeRange, hitRange, faceplaceHP, minDamage, maxSelf, keybind);
     }
 
