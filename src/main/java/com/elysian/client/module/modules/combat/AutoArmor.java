@@ -1,3 +1,5 @@
+//https://github.com/WurstPlus/wurstplus-two/blob/master/src/main/java/me/travis/wurstplus/wurstplustwo/hacks/combat/WurstplusAutoArmour.java
+
 package com.elysian.client.module.modules.combat;
 
 import com.elysian.client.module.ModuleType;
