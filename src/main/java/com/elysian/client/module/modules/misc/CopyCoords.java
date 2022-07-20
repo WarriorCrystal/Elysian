@@ -1,8 +1,8 @@
 package com.elysian.client.module.modules.misc;
 
+import com.elysian.client.command.Command;
 import com.elysian.client.module.ModuleType;
 import com.elysian.client.module.ToggleableModule;
-import com.elysian.client.util.MessageUtil;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -11,7 +11,7 @@ import java.awt.datatransfer.StringSelection;
 public class CopyCoords extends ToggleableModule {
 
     public CopyCoords() {
-        super("CopyCoords", new String[] {"Copy ur coords :V"}, "SEX", ModuleType.MISC);
+        super("CopyCoords", new String[] {"copycoords"}, "Copies your cords to clipboard", ModuleType.MISC);
         this.offerProperties(keybind);
     }
 
@@ -24,9 +24,8 @@ public class CopyCoords extends ToggleableModule {
         StringSelection stringSelection = new StringSelection(myString);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
-        MessageUtil.send_client_message("Copied coords to clipboard");
+        Command.sendClientSideMessage("Copied coords to clipboard");
         toggle();
-
     }
 
 }
