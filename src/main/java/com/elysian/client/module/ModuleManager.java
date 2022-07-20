@@ -54,6 +54,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new AutoEat());
         register(new AutoLog());
         //register(new Reach());
+        register(new AutoDemon());
         register(new AutoArmor());
         register(new AutoFish());
         register(new KillAura());
