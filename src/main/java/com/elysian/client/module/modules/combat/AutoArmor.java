@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 
 public class AutoArmor extends ToggleableModule {
 
-    private final NumberProperty<Integer> Delay = new NumberProperty<Integer>(5, 0, 50, "Delay");
-    private final NumberProperty<Integer> PlayerRange = new NumberProperty<Integer>(5, 0, 50, "Player Range");
-    private final NumberProperty<Integer> CrystalRange = new NumberProperty<Integer>(5, 0, 50, "Crystal Range");
-    private final NumberProperty<Integer> BootPercent = new NumberProperty<Integer>(5, 0, 50, "Boot Percent");
-    private final NumberProperty<Integer> ChestPercent = new NumberProperty<Integer>(5, 0, 50, "Chest Percent");
+    private final NumberProperty<Integer> Delay = new NumberProperty<Integer>(2, 0, 5, "Delay");
+    private final NumberProperty<Integer> PlayerRange = new NumberProperty<Integer>(8, 0, 20, "Player Range");
+    private final NumberProperty<Integer> CrystalRange = new NumberProperty<Integer>(13, 0, 20, "Crystal Range");
+    private final NumberProperty<Integer> BootPercent = new NumberProperty<Integer>(80, 0, 110, "Boot Percent");
+    private final NumberProperty<Integer> ChestPercent = new NumberProperty<Integer>(80, 0, 110, "Chest Percent");
     private final Property<Boolean> SmartMod = new Property<Boolean>(true, "Smart Mode", "Smart Mode");
     private final Property<Boolean> EquipArmour = new Property<Boolean>(true, "Equip Armour", "Equip Armour");
 
