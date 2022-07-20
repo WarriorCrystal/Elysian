@@ -220,7 +220,7 @@ public class AutoDemon extends ToggleableModule {
             if (renderMap.isEmpty()) return;
             boolean outline = false;
             boolean solid = false;
-            switch (mode.getValue()) {
+            switch (autoSwitch.getValue().toString()) {
 
             }
             List<RenderPos> toRemove = new ArrayList<>();
@@ -272,7 +272,7 @@ public class AutoDemon extends ToggleableModule {
                     && event.get_packet() instanceof CPacketUseEntity
                     && (packet = (CPacketUseEntity) event.get_packet()).getAction() == CPacketUseEntity.Action.ATTACK
                     && packet.getEntityFromWorld(mc.world) instanceof EntityEnderCrystal) {
-                if (AutoDemon.this.mode.getValue().equals(FastMode.Ghost)) {
+                if (AutoDemon.this.fastMode.getValue().equals(FastMode.Ghost)) {
                     Objects.requireNonNull(packet.getEntityFromWorld(mc.world)).setDead();
                     mc.world.removeEntityFromWorld(packet.entityId);
                 }
@@ -282,7 +282,7 @@ public class AutoDemon extends ToggleableModule {
 
         @EventHandler
         private final Listener<EventMotionUpdate> on_movement = new Listener<>(event -> {
-            if (event.stage == 0 && !AutoDemon.this.mode.getValue().equals(Rotate.Off)) {
+            if (event.stage == 0 && !AutoDemon.this.rotateMode.getValue().equals(Rotate.Off)) {
                 this.doCrystalAura();
             }
         });
@@ -321,7 +321,7 @@ public class AutoDemon extends ToggleableModule {
                 SPacketEntityTeleport tpPacket = (SPacketEntityTeleport) event.get_packet();
                 Entity e = mc.world.getEntityByID(tpPacket.getEntityId());
                 if (e == mc.player) return;
-                if (e instanceof EntityPlayer && AutoDemon.this.mode.getValue().equals(PredictTP.Packet)) {
+                if (e instanceof EntityPlayer && AutoDemon.this.predictTeleport.getValue().equals(PredictTP.Packet)) {
                     e.setEntityBoundingBox(e.getEntityBoundingBox().offset(tpPacket.getX(), tpPacket.getY(), tpPacket.getZ()));
                 }
             }
@@ -329,7 +329,7 @@ public class AutoDemon extends ToggleableModule {
             // same as above but works on the sound effect rather than the tp packet
             if (event.get_packet() instanceof SPacketSoundEffect) {
                 SPacketSoundEffect soundPacket = (SPacketSoundEffect) event.get_packet();
-                if (soundPacket.getSound() == SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT && AutoDemon.this.mode.getValue().equals(PredictTP.Sound)) {
+                if (soundPacket.getSound() == SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT && AutoDemon.this.predictTeleport.getValue().equals(PredictTP.Sound)) {
                     mc.world.loadedEntityList.spliterator().forEachRemaining(player -> {
                         if (player instanceof EntityPlayer && player != mc.player) {
                             if (player.getDistance(soundPacket.getX(), soundPacket.getY(), soundPacket.getZ()) <= targetRange.getValue()) {
@@ -347,7 +347,7 @@ public class AutoDemon extends ToggleableModule {
                                 if (crystal.getDistance(soundPacket.getX(), soundPacket.getY(), soundPacket.getZ()) <= breakRange.getValue()) {
                                     crystalLatency = System.currentTimeMillis() - start;
                                     //AutoDemon.this.mode.getValue().equals(PredictTP.Packet)) {
-                                    if (AutoDemon.this.mode.getValue().equals(FastMode.Sound)) {
+                                    if (AutoDemon.this.fastMode.getValue().equals(FastMode.Sound)) {
                                         crystal.setDead();
                                     }
                                 }
@@ -383,7 +383,7 @@ public class AutoDemon extends ToggleableModule {
                     blue2.setValue(rainbowColor.getBlue());
                 }
 
-                if (AutoDemon.this.mode.getValue().equals(Rotate.Off)) {
+                if (AutoDemon.this.rotateMode.getValue().equals(Rotate.Off)) {
                     this.doCrystalAura();
                 }
 
@@ -445,8 +445,8 @@ public class AutoDemon extends ToggleableModule {
                 int stackSize = getCrystalCount(false);
                 alreadyAttacking = false;
                 if (mc.player.getHeldItemOffhand().getItem() != Items.END_CRYSTAL) {
-                    if (mc.player.getHeldItemMainhand().getItem() != Items.END_CRYSTAL && (AutoDemon.this.mode.getValue().equals(AutoSwitch.Allways) || AutoDemon.this.mode.getValue().equals(AutoSwitch.None))) {
-                        if (AutoDemon.this.mode.getValue().equals(AutoSwitch.NoGap)) {
+                    if (mc.player.getHeldItemMainhand().getItem() != Items.END_CRYSTAL && (AutoDemon.this.autoSwitch.getValue().equals(AutoSwitch.Allways) || AutoDemon.this.autoSwitch.getValue().equals(AutoSwitch.None))) {
+                        if (AutoDemon.this.autoSwitch.getValue().equals(AutoSwitch.NoGap)) {
                             if (mc.player.getHeldItemMainhand().getItem() == Items.GOLDEN_APPLE) {
                                 return;
                             }
@@ -460,7 +460,7 @@ public class AutoDemon extends ToggleableModule {
                 } else {
                     offhandCheck = true;
                 }
-                if (AutoDemon.this.mode.getValue().equals(AutoSwitch.Silent)) {
+                if (AutoDemon.this.autoSwitch.getValue().equals(AutoSwitch.Silent)) {
                     if (slot != -1) {
                         if (mc.player.isHandActive() && silentSwitchHand.getValue()) {
                             hand = mc.player.getActiveHand();
@@ -472,7 +472,7 @@ public class AutoDemon extends ToggleableModule {
                 facePlaceDelayCounter = 0;
                 didAnything = true;
                 for (BlockPos targetBlock : placePositions) {
-                    if (mc.player.getHeldItemMainhand().getItem() instanceof ItemEndCrystal || mc.player.getHeldItemOffhand().getItem() instanceof ItemEndCrystal || AutoDemon.this.mode.getValue().equals(AutoSwitch.Silent)) {
+                    if (mc.player.getHeldItemMainhand().getItem() instanceof ItemEndCrystal || mc.player.getHeldItemOffhand().getItem() instanceof ItemEndCrystal || AutoDemon.this.autoSwitch.getValue().equals(AutoSwitch.Silent)) {
                         if (setYawPitch(targetBlock)) {
                             EntityEnderCrystal cCheck = CrystalUtil.isCrystalStuck(targetBlock.up());
                             if (cCheck != null && antiStuck.getValue()) {
@@ -484,7 +484,7 @@ public class AutoDemon extends ToggleableModule {
                     }
                 }
                 int newSize = getCrystalCount(offhandCheck);
-                if (AutoDemon.this.mode.getValue().equals(AutoSwitch.Silent)) {
+                if (AutoDemon.this.autoSwitch.getValue().equals(AutoSwitch.Silent)) {
                     if (slot != -1) {
                         mc.player.connection.sendPacket(new CPacketHeldItemChange(old));
                         if (silentSwitchHand.getValue() && hand != null) {
@@ -565,7 +565,7 @@ public class AutoDemon extends ToggleableModule {
 
                     if (mc.player.getDistanceSq(target) > MathUtil.square((float) targetRange.getValue())) continue;
 
-                    if (entityPredict.getValue() && AutoDemon.this.mode.getValue().equals(Rotate.Off) && target != mc.player) {
+                    if (entityPredict.getValue() && AutoDemon.this.rotateMode.getValue().equals(Rotate.Off) && target != mc.player) {
                         float f = target.width / 2.0F, f1 = target.height;
                         target.setEntityBoundingBox(new AxisAlignedBB(target.posX - (double) f, target.posY, target.posZ - (double) f, target.posX + (double) f, target.posY + (double) f1, target.posZ + (double) f));
                         Entity y = CrystalUtil.getPredictedPosition(target, predictedTicks.getValue());
@@ -582,7 +582,7 @@ public class AutoDemon extends ToggleableModule {
                 }
             }
 
-            if (bestCrystal != null && (AutoDemon.this.mode.getValue().equals(RenderW.Both) || AutoDemon.this.mode.getValue().equals(RenderW.Break))) {
+            if (bestCrystal != null && (AutoDemon.this.when.getValue().equals(RenderW.Both) || AutoDemon.this.when.getValue().equals(RenderW.Break))) {
                 BlockPos renderPos = bestCrystal.getPosition().down();
                 clearMap(renderPos);
                 renderMap.add(new RenderPos(renderPos, bestDamage));
@@ -592,7 +592,7 @@ public class AutoDemon extends ToggleableModule {
 
         public final ArrayList<BlockPos> getBestBlocks() {
             ArrayList<RenderPos> posArrayList = new ArrayList<>();
-            if (getBestCrystal() != null && AutoDemon.this.mode.getValue().equals(FastMode.Off)) {
+            if (getBestCrystal() != null && AutoDemon.this.fastMode.getValue().equals(FastMode.Off)) {
                 placeTimeoutFlag = true;
                 return null;
             }
@@ -648,7 +648,7 @@ public class AutoDemon extends ToggleableModule {
             ArrayList<BlockPos> finalArrayList = new ArrayList<>();
             IntStream.range(0, Math.min(maxCrystals, posArrayList.size())).forEachOrdered(n -> {
                 RenderPos pos = posArrayList.get(n);
-                if (AutoDemon.this.mode.getValue().equals(RenderW.Both) || AutoDemon.this.mode.getValue().equals(RenderW.Place)) {
+                if (AutoDemon.this.when.getValue().equals(RenderW.Both) || AutoDemon.this.when.getValue().equals(RenderW.Place)) {
                     clearMap(pos.pos);
                     if (pos.pos != null) renderMap.add(pos);
                 }
@@ -717,7 +717,7 @@ public class AutoDemon extends ToggleableModule {
                 }
                 if (selfDamage > maxSelfBreak.getValue()) return 0;
                 if (EntityUtil.getHealth(mc.player) - selfDamage <= 0 && this.antiSuicide.getValue()) return 0;
-                switch (crystalLogic.getValue()) {
+                switch (crystalLogic.getValue().toString()) {
                    /* case "Safe":
                         return targetDamage - selfDamage;
                     case "Damage":
@@ -761,7 +761,7 @@ public class AutoDemon extends ToggleableModule {
                 }
                 if (selfDamage > maxSelfPlace.getValue()) return 0;
                 if (EntityUtil.getHealth(mc.player) - selfDamage <= 0 && this.antiSuicide.getValue()) return 0;
-                switch (crystalLogic.getValue()) {
+                switch (crystalLogic.getValue().toString()) {
                   /*  case:
                         return targetDamage - selfDamage;
                     case "Damage":
@@ -815,7 +815,7 @@ public class AutoDemon extends ToggleableModule {
         }
 
         private boolean setYawPitch(EntityEnderCrystal crystal) {
-            if (AutoDemon.this.mode.getValue().equals(Rotate.Off) || AutoDemon.this.mode.getValue().equals(Rotate.Place)) return true;
+            if (AutoDemon.this.rotateMode.getValue().equals(Rotate.Off) || AutoDemon.this.rotateMode.getValue().equals(Rotate.Place)) return true;
             float[] angle = MathUtil.calcAngle(mc.player.getPositionEyes(mc.getRenderPartialTicks()), crystal.getPositionEyes(mc.getRenderPartialTicks()));
             float yaw = angle[0];
             float pitch = angle[1];
@@ -826,7 +826,7 @@ public class AutoDemon extends ToggleableModule {
         }
 
         public boolean setYawPitch(BlockPos pos) {
-            if (AutoDemon.this.mode.getValue().equals(Rotate.Off)  || AutoDemon.this.mode.getValue().equals(Rotate.Break))  return true;
+            if (AutoDemon.this.rotateMode.getValue().equals(Rotate.Off)  || AutoDemon.this.rotateMode.getValue().equals(Rotate.Break))  return true;
             float[] angle = MathUtil.calcAngle(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d((float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f));
             float yaw = angle[0];
             float pitch = angle[1];
