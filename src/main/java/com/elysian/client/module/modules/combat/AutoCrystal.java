@@ -57,7 +57,7 @@ public class AutoCrystal extends ToggleableModule {
     private final Property<Boolean> antiSuicide  = new Property<Boolean>(false, "Anti Suicide", "Anti Suicide");
 
     //general
-        private final EnumProperty<rotatemode> rotateMode  = new EnumProperty<rotatemode>(rotatemode.Off, "Rotate Mode", "rm");
+    private final EnumProperty<rotatemode> rotateMode  = new EnumProperty<rotatemode>(rotatemode.Off, "Rotate Mode", "rm");
     private final NumberProperty<Integer> maxYaw  = new NumberProperty<Integer>(180, 0, 180, "Max Yaw");
     private final Property<Boolean> raytrace  = new Property<Boolean>(false, "RayTrace", "RayTrace");
     private final EnumProperty<fastmode> fastMode  = new EnumProperty<fastmode>(fastmode.Off, "Fast Mode", "Fast Mode");
@@ -71,7 +71,6 @@ public class AutoCrystal extends ToggleableModule {
     private final Property<Boolean> attackPacket  = new Property<Boolean>(false, "Attack Packet", "Attack Packet");
     private final Property<Boolean> packetSafe  = new Property<Boolean>(false, "Packet Safe", "Packet Safe");
     private final Property<Boolean> noBreakCalcs  = new Property<Boolean>(false, "No Break Calcs", "NOBREAKCALCS");
-    private final EnumProperty<ArrayListMode> arrayListMode  = new EnumProperty<ArrayListMode>(ArrayListMode.CPS, "Arraylist Mode", "alm");
     private final Property<Boolean> debug  = new Property<Boolean>(false, "Debug", "Db");
 
     //misc
@@ -82,7 +81,7 @@ public class AutoCrystal extends ToggleableModule {
     //predict
     private final Property<Boolean> predictCrystal  = new Property<Boolean>(false, "Predict Crystal", "Predict Crystal");
     private final Property<Boolean> predictBlock  = new Property<Boolean>(false, "Predict Block", "Predict Block");
-    private final EnumProperty<ModuleExample.Mode> predictTeleport  = new EnumProperty<ModuleExample.Mode>(ModuleExample.Mode.ONE, "Predict Teleport", "Predict Teleport");
+    private final EnumProperty<PredictTP> predictTeleport  = new EnumProperty<PredictTP>(PredictTP.None, "Predict Teleport", "Predict Teleport");
     private final Property<Boolean> entityPredict  = new Property<Boolean>(false, "Entity Predict", "Entity Predict");
     private final NumberProperty<Integer> predictedTicks = new NumberProperty<Integer>(5, 0, 50, "Predicted Ticks");
 
@@ -138,12 +137,6 @@ public class AutoCrystal extends ToggleableModule {
         Safe
     }
 
-    public enum ArrayListMode {
-        Latency,
-        Player,
-        CPS
-    }
-
     public enum RenderW {
         Place,
         Break,
@@ -164,8 +157,13 @@ public class AutoCrystal extends ToggleableModule {
         None
     }
 
+    public enum PredictTP {
+        Sound,
+        Packet,
+        None
+    }
     public AutoCrystal() {
         super("AutoCrystal", new String[] {"AutoCrystal"}, "AutoCrystal", ModuleType.COMBAT);
-        this.offerProperties(breakRange, placeRange, breakRangeWall, placeRangeWall, targetRange, placeDelay, breakDelay, sortBlocks, ignoreSelfDamage, minPlace, maxSelfPlace, minBreak, maxSelfBreak, antiSuicide, maxYaw, raytrace, fastMode, autoSwitch, silentSwitchHand, antiWeakness, maxCrystals, ignoreTerrain, crystalLogic, thirteen, attackPacket, packetSafe, noBreakCalcs, arrayListMode, debug, threaded, antiStuck, maxAntiStuckDamage, predictCrystal, predictBlock, predictTeleport, entityPredict, predictedTicks, palceObiFeet, ObiYCheck, rotateObiFeet, timeoutTicksObiFeet, noMP, facePlaceHP, facePlaceDelay, fuckArmourHP, when, mode, fade, fadeTime, flat, height, width, renderDamage, swing, placeSwing, keybind);
+        this.offerProperties(breakRange, placeRange, breakRangeWall, placeRangeWall, targetRange, placeDelay, breakDelay, sortBlocks, ignoreSelfDamage, minPlace, maxSelfPlace, minBreak, maxSelfBreak, antiSuicide, maxYaw, raytrace, fastMode, autoSwitch, silentSwitchHand, antiWeakness, maxCrystals, ignoreTerrain, crystalLogic, thirteen, attackPacket, packetSafe, noBreakCalcs, debug, threaded, antiStuck, maxAntiStuckDamage, predictCrystal, predictBlock, predictTeleport, entityPredict, predictedTicks, palceObiFeet, ObiYCheck, rotateObiFeet, timeoutTicksObiFeet, noMP, facePlaceHP, facePlaceDelay, fuckArmourHP, when, mode, fade, fadeTime, flat, height, width, renderDamage, swing, placeSwing, keybind);
     }
 }
