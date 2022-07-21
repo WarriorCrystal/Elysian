@@ -18,7 +18,7 @@ public class Animations extends ToggleableModule {
     private final NumberProperty<Integer> swingDelay  = new NumberProperty<Integer>(6, 1, 20, "Swing Delay");
 
     public Animations() {
-        super("Animations", new String[] {"Animations"}, "Animations", ModuleType.MISC);
+        super("Animations", new String[] {"Animations"}, "Animations", ModuleType.RENDER);
         this.offerProperties(playersDisableAnimations, changeMainhand, changeOffhand, changeSwing, mainhand, offhand, swingDelay, this.keybind);
     }
 
