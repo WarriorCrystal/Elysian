@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class LongJump extends ToggleableModule {
 
-    private final NumberProperty<Float> speed = new NumberProperty<Float>(30.00f, 1.00f, 100.00f, "Example");
+    private final NumberProperty<Float> speed = new NumberProperty<Float>(30.00f, 1.00f, 100.00f, "speed");
     private final Property<Boolean> packet = new Property<Boolean>(true, "Packet", "LGPacket");
     private final Property<Boolean> toggle = new Property<Boolean>(false, "Toggle", "LGToggle");
     private static boolean jumped = false;
