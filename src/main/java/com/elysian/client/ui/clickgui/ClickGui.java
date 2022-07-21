@@ -39,7 +39,7 @@ public final class ClickGui extends GuiScreen {
                 public void setupItems() {
                     Elysian.getInstance().getModuleManager().getRegistry().forEach(module -> {
                         ToggleableModule toggleableModule;
-                        if (module instanceof Toggleable && !module.getLabel().equalsIgnoreCase("ClickGui") && (toggleableModule = (ToggleableModule)module).getModuleType().equals((Object)moduleType)) {
+                        if (module instanceof Toggleable && (toggleableModule = (ToggleableModule)module).getModuleType().equals((Object)moduleType)) {
                             this.addButton(new ModuleButton(toggleableModule));
                         }
                     });
@@ -51,7 +51,7 @@ public final class ClickGui extends GuiScreen {
             @Override
             public void setupItems() {
                 Elysian.getInstance().getModuleManager().getRegistry().forEach(module -> {
-                    if (!(module instanceof Toggleable || module.getLabel().equalsIgnoreCase("ClickGui"))) {
+                    if (!(module instanceof Toggleable)) {
                         this.addButton(new ModuleButton((Module)module));
                     }
                 });

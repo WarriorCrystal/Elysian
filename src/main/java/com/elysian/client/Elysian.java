@@ -13,6 +13,7 @@ import com.elysian.client.friend.FriendManager;
 import com.elysian.client.keybind.KeybindManager;
 import com.elysian.client.module.ModuleManager;
 import com.elysian.client.ui.hud.HudManager;
+import com.elysian.client.util.spark.FontManager;
 
 import java.io.File;
 
@@ -32,6 +33,7 @@ public final class Elysian {
     private final FriendManager friendManager;
     private final HudManager hudManager;
     private final File directory;
+    public static final FontManager fontManager = new FontManager();
 
     public Elysian() {
         EVENT_BUS.register(EventProcessor.INSTANCE);
