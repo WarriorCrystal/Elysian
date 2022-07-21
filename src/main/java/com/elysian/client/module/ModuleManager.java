@@ -59,6 +59,7 @@ public final class ModuleManager extends Registry<Module> {
         //register(new Reach());
         register(new AutoArmor());
         register(new CopyCoords());
+        register(new AntiFog());
         register(new DotGodAC());
         register(new AutoFish());
         register(new KillAura());
