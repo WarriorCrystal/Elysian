@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.elysian.client.event.events.InputEvent;
 import com.elysian.client.event.events.PacketEvent;
@@ -39,17 +40,13 @@ public class SuperHeroFX extends ToggleableModule {
         offerProperties(ExplosionDelay, HitDelay, Scaling, keybind);
     }
 
-    private List<PopupText> popTexts;
-    private Random rand;
-    private Timer hitTimer;
-    private Timer explosionTimer;
+    private List<PopupText> popTexts = new CopyOnWriteArrayList<PopupText>();
+    private Random rand = new Random();
+    private Timer hitTimer = new Timer();
+    private Timer explosionTimer = new Timer();
     private static String[] superHeroTextsBlowup;
     private static String[] superHeroTextsDamageTaken;
     private SalRainbowUtil rainbow = new SalRainbowUtil(9);
-    popTexts = new CopyOnWriteArrayList<PopupText>();
-    rand = new Random();
-    hitTimer = new Timer();
-    explosionTimer = new Timer();
     Entity entity2;
     Vec3d pos;
     double n;
