@@ -37,6 +37,7 @@ public final class ModuleManager extends Registry<Module> {
         //register(new Scaffold());
         //register(new AntiDesync());
         register(new Notification());
+        register(new AutoGear());
         register(new StorageESP());
         register(new ESP());
         register(new Tracers());
