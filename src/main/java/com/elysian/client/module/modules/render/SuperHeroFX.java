@@ -73,19 +73,14 @@ public class SuperHeroFX extends ToggleableModule {
         return;
     }
 
-    SPacketExplosion packet;
+    Vec3d pos1;
     Vec3d pos3;
-    Vec3d testpos = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
-    final PopupText popupText = new PopupText("fix", testpos);
+    SPacketExplosion packet;
     SPacketEntityStatus packet2;
     Entity e;
     List<PopupText> popTexts2;
-    Vec3d testpos2 = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
-    final PopupText popupText2 = new PopupText("fix", testpos2);
     Vec3d pos4;
     List<PopupText> popTexts3;
-    Vec3d testpos3 = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
-    final PopupText popupText3 = new PopupText("fix", testpos3);
     SPacketDestroyEntities packet3;
     final int[] array = new int[1];
     int length;
@@ -94,8 +89,6 @@ public class SuperHeroFX extends ToggleableModule {
     Entity e2;
     Vec3d pos5;
     List<PopupText> popTexts4;
-    Vec3d testpos4 = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
-    final PopupText popupText4 = new PopupText("fix", testpos4);
 
     @Override
     public void packet(PacketEvent event) {
@@ -105,7 +98,7 @@ public class SuperHeroFX extends ToggleableModule {
                 if (mc.player.getDistance(pos3.x, pos3.y, pos3.z) < 10.0 && explosionTimer.passed(ExplosionDelay.getValue() * 1000.0f)) {
                     explosionTimer.reset();
                     this.popTexts = popTexts;
-                    new PopupText(ChatFormatting.ITALIC + superHeroTextsBlowup[rand.nextInt(superHeroTextsBlowup.length)], pos3);
+                    PopupText popupText = new PopupText(ChatFormatting.ITALIC + superHeroTextsBlowup[rand.nextInt(superHeroTextsBlowup.length)], pos3);
                     popTexts.add(popupText);
                 }
             }
@@ -116,7 +109,7 @@ public class SuperHeroFX extends ToggleableModule {
                     if (packet2.getOpCode() == 35) {
                         if (e != null && mc.player.getDistance(e) < 20.0f) {
                             popTexts2 = popTexts;
-                            new PopupText(ChatFormatting.ITALIC + "POP", e.getPositionVector().add((double)(rand.nextInt(2) / 2), 1.0, (double)(rand.nextInt(2) / 2)));
+                            PopupText popupText2 = new PopupText(ChatFormatting.ITALIC + "POP", e.getPositionVector().add((double)(rand.nextInt(2) / 2), 1.0, (double)(rand.nextInt(2) / 2)));
                             popTexts2.add(popupText2);
                         }
                     }
@@ -126,7 +119,7 @@ public class SuperHeroFX extends ToggleableModule {
                             if (hitTimer.passed(HitDelay.getValue() * 1000.0f)) {
                                 hitTimer.reset();
                                 popTexts3 = popTexts;
-                                new PopupText(ChatFormatting.ITALIC + superHeroTextsDamageTaken[rand.nextInt(superHeroTextsBlowup.length)], pos4);
+                                PopupText popupText3 = new PopupText(ChatFormatting.ITALIC + superHeroTextsDamageTaken[rand.nextInt(superHeroTextsBlowup.length)], pos4);
                                 popTexts3.add(popupText3);
                             }
                         }
@@ -143,7 +136,7 @@ public class SuperHeroFX extends ToggleableModule {
                         if ((mc.player.getDistance(e2) < 20.0f & e2 != mc.player) && e2 instanceof EntityPlayer) {
                             pos5 = new Vec3d(e2.posX + Math.random(), e2.posY + Math.random() - 2.0, e2.posZ + Math.random());
                             popTexts4 = popTexts;
-                            new PopupText(ChatFormatting.ITALIC + "" + ChatFormatting.BOLD + "EZ", pos5);
+                            PopupText popupText4 = new PopupText(ChatFormatting.ITALIC + "" + ChatFormatting.BOLD + "EZ", pos5);
                             popTexts4.add(popupText4);
                         }
                     }
