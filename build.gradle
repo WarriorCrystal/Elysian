@@ -41,6 +41,7 @@ repositories {
 }
 
 dependencies {
+    compile group : "net.jodah", name : "typetools",   version: "0.5.0"
     compile(group: 'org.jetbrains', name: 'annotations', version: '23.0.0')
     compile('com.github.ionar2:Alpine:1.9f')
     compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
@@ -55,6 +56,7 @@ dependencies {
 
 shadowJar {
     dependencies {
+        include dependency("net.jodah:typetools")
         include dependency('org.jetbrains:annotations:23.0.0')
         include dependency('com.github.ionar2:Alpine')
         include dependency('club.minnced:java-discord-rpc:2.0.2')
