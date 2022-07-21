@@ -51,9 +51,11 @@ public final class ModuleManager extends Registry<Module> {
         register(new SmallOffhand());
         register(new Timer());
         register(new Criticals());
+        register(new OffHandSwing());
         register(new DiscordRP());
         register(new AutoEat());
         register(new AutoLog());
+        register(new SwingAnimFix());
         //register(new Reach());
         register(new AutoArmor());
         register(new CopyCoords());
