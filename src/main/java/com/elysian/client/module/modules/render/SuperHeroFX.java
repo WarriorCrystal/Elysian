@@ -75,23 +75,27 @@ public class SuperHeroFX extends ToggleableModule {
 
     SPacketExplosion packet;
     Vec3d pos3;
-    final PopupText popupText;
+    Vec3d testpos = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
+    final PopupText popupText = new PopupText("fix", testpos);
     SPacketEntityStatus packet2;
     Entity e;
     List<PopupText> popTexts2;
-    final PopupText popupText2;
+    Vec3d testpos2 = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
+    final PopupText popupText2 = new PopupText("fix", testpos2);
     Vec3d pos4;
     List<PopupText> popTexts3;
-    final PopupText popupText3;
+    Vec3d testpos3 = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
+    final PopupText popupText3 = new PopupText("fix", testpos3);
     SPacketDestroyEntities packet3;
-    final int[] array;
+    final int[] array = new int[1];
     int length;
     int i = 0;
     int id;
     Entity e2;
     Vec3d pos5;
     List<PopupText> popTexts4;
-    final PopupText popupText4;
+    Vec3d testpos4 = new Vec3d(1 + Math.random(), 1 + Math.random() - 2.0, 1 + Math.random());
+    final PopupText popupText4 = new PopupText("fix", testpos4);
 
     @Override
     public void packet(PacketEvent event) {
@@ -100,7 +104,7 @@ public class SuperHeroFX extends ToggleableModule {
                 pos3 = new Vec3d(packet.getX() + Math.random(), packet.getY() + Math.random() - 2.0, packet.getZ() + Math.random());
                 if (mc.player.getDistance(pos3.x, pos3.y, pos3.z) < 10.0 && explosionTimer.passed(ExplosionDelay.getValue() * 1000.0f)) {
                     explosionTimer.reset();
-                    popTexts = popTexts;
+                    this.popTexts = popTexts;
                     new PopupText(ChatFormatting.ITALIC + superHeroTextsBlowup[rand.nextInt(superHeroTextsBlowup.length)], pos3);
                     popTexts.add(popupText);
                 }
