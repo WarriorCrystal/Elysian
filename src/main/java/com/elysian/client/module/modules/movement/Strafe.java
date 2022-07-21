@@ -10,12 +10,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public final class Strafe extends ToggleableModule {
 
     int waitCounter;
-    int forward;
+    int forward = 1;
 
     public Strafe() {
         super("Strafe", new String[]{"strafe"}, "Warrior Strafe, works on 2B2T", ModuleType.MOVEMENT);
         this.offerProperties(this.keybind);
-        forward = 1;
     }
 
     @Override
