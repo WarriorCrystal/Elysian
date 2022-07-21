@@ -27,6 +27,7 @@ public final class ModuleManager extends Registry<Module> {
 
         register(new Fullbright());
         register(new ClickGui());
+        register(new SuperHeroFX());
         register(new Colours());
         register(new Hud());
         register(new Sprint());
