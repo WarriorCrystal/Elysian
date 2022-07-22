@@ -32,7 +32,7 @@ public class StrengthDetect extends ToggleableModule {
                 continue;
             }
             if (player.isPotionActive(MobEffects.STRENGTH) && !this.str.contains(player)) {
-                Command.sendClientSideMessage(ChatFormatting.RESET + player.getDisplayNameString() + " has " + ChatFormatting.RED + "strength");
+                Command.sendClientSideMessage(ChatFormatting.RESET + player.getDisplayNameString() + " has " + ChatFormatting.RED + "Strength");
                 this.str.add(player);
             }
             if (!this.str.contains(player)) {
@@ -41,7 +41,7 @@ public class StrengthDetect extends ToggleableModule {
             if (player.isPotionActive(MobEffects.STRENGTH)) {
                 continue;
             }
-            Command.sendClientSideMessage(ChatFormatting.RESET + player.getDisplayNameString() + " no longer has " + ChatFormatting.RED + "strength");
+            Command.sendClientSideMessage(ChatFormatting.RESET + player.getDisplayNameString() + " no longer has " + ChatFormatting.RED + "Strength");
             this.str.remove(player);
         }
     }

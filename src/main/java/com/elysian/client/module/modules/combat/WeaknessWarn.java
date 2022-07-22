@@ -21,11 +21,11 @@ public class WeaknessWarn extends ToggleableModule {
     public void update(TickEvent event) {
         if (mc.player.isPotionActive(MobEffects.WEAKNESS) && !hasAnnounced) {
             hasAnnounced = true;
-            Command.sendClientSideMessage(ChatFormatting.RESET + "you've got " + ChatFormatting.GRAY + "weakness");
+            Command.sendClientSideMessage(ChatFormatting.RESET + "you've got " + ChatFormatting.GRAY + "Weakness");
         }
         if (!mc.player.isPotionActive(MobEffects.WEAKNESS) && hasAnnounced) {
             hasAnnounced = false;
-            Command.sendClientSideMessage(ChatFormatting.RESET + "you no longer have " + ChatFormatting.GRAY + "weakness");
+            Command.sendClientSideMessage(ChatFormatting.RESET + "you no longer have " + ChatFormatting.GRAY + "Weakness");
         }
     }
 
