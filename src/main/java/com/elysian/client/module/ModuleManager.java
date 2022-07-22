@@ -79,6 +79,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new PopCount());
         register(new StrengthDetect());
         register(new WeaknessWarn());
+        register(new AntiLog4j());
 
         Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_RSHIFT);
 
