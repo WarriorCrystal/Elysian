@@ -75,6 +75,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new GreenChat());
         register(new InventoryMove());
         register(new TimeChanger());
+        register(new GhostGap());
 
         Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_RSHIFT);
 
