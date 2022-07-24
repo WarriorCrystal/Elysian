@@ -14,7 +14,6 @@ import com.elysian.client.keybind.KeybindManager;
 import com.elysian.client.module.ModuleManager;
 import com.elysian.client.ui.hud.HudManager;
 import com.elysian.client.util.spark.FontManager;
-import com.elysian.client.util.summit.EventManager;
 
 import java.io.File;
 
@@ -26,7 +25,6 @@ public final class Elysian {
     public static final String ELYSIAN = NAME + " " + VERSION;
     public static final Minecraft mc = Minecraft.getMinecraft();
     public static EventBus EVENT_BUS = MinecraftForge.EVENT_BUS;
-    public static com.elysian.client.util.summit.EventBus SAL_EVENT_BUS = new EventManager();
     public static Elysian instance = null;
     private final CommandManager commandManager;
     private final ConfigManager configManager;
