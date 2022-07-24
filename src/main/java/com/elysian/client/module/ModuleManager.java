@@ -80,7 +80,6 @@ public final class ModuleManager extends Registry<Module> {
         register(new StrengthDetect());
         register(new WeaknessWarn());
         register(new AntiLog4j());
-        register(new WoWTooltips());
         register(new Offhand());
         register(new FrameDupe());
 
