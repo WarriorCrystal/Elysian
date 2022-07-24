@@ -44,7 +44,6 @@ public final class ModuleManager extends Registry<Module> {
         //register(new KillAura());
         register(new FastPlace());
         register(new YawLock());
-        register(new ChatSuffix());
         register(new Speed());
         //register(new AutoTotem());
         register(new FakePlayer());
