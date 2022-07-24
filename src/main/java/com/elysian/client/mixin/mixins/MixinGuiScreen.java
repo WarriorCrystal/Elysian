@@ -14,13 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.elysian.client.Elysian;
 import com.elysian.client.util.summit.EventRenderTooltip;
+import com.elysian.client.util.summit.Listener;
 
-import me.zero.alpine.fork.bus.EventBus;
-import me.zero.alpine.fork.listener.Listener;
 
 
 @Mixin(GuiScreen.class)
-public abstract class MixinGuiScreen
+public class MixinGuiScreen
 {
     @Shadow
     protected Listener<GuiButton> buttonList;
