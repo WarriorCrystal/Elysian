@@ -81,6 +81,7 @@ public final class ModuleManager extends Registry<Module> {
         register(new WeaknessWarn());
         register(new AntiLog4j());
         register(new WoWTooltips());
+        register(new Offhand());
 
         Elysian.getInstance().getKeybindManager().getKeybindByLabel("ClickGui").setKey(Keyboard.KEY_RSHIFT);
 
