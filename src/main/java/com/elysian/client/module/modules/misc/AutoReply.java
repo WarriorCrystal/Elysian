@@ -15,7 +15,7 @@ public class AutoReply extends ToggleableModule {
     @EventHandler
     private Listener<ClientChatReceivedEvent> listener = new Listener<>(event ->{
         if( event.getMessage().getUnformattedText().contains("whispers: ") && !event.getMessage().getUnformattedText().startsWith(mc.player.getName())){
-            mc.player.sendChatMessage("/r Este es el AutoReply de Elysian, no me hablei qliao");
+            mc.player.sendChatMessage("/r Este es el AutoReply de Elysian, no me hables nob");
         }
     });
 }
