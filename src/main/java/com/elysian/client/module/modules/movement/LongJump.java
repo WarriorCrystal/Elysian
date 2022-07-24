@@ -15,13 +15,13 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class LongJump extends ToggleableModule {
 
     private final NumberProperty<Float> speed = new NumberProperty<Float>(30.00f, 1.00f, 100.00f, "speed");
-    private final Property<Boolean> packet = new Property<Boolean>(true, "Packet", "LGPacket");
+    private final Property<Boolean> packet = new Property<Boolean>(false, "Packet", "LGPacket");
     private final Property<Boolean> toggle = new Property<Boolean>(false, "Toggle", "LGToggle");
     private static boolean jumped = false;
     private static boolean boostable = false;
 
     public LongJump() {
-        super("LongJump", new String[] {"Salto largo"}, "warrior es gei", ModuleType.MOVEMENT);
+        super("LongJump", new String[] {"Salto largo"}, "Grego de mrd", ModuleType.MOVEMENT);
         this.offerProperties(speed, packet, toggle, this.keybind);
     }
 
