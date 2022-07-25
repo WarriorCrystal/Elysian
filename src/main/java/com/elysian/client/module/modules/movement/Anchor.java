@@ -20,7 +20,7 @@ public class Anchor extends ToggleableModule {
     private final NumberProperty<Integer> pitch  = new NumberProperty<Integer>(5, 0, 50, "Example");
 
     public Anchor() {
-        super("Anchor", new String[] {"Anchor"}, "Anchor", ModuleType.MISC);
+        super("Anchor", new String[] {"Anchor"}, "Anchor", ModuleType.MOVEMENT);
         this.offerProperties(height, doubles, drop, speed, pitchD, pitch, keybind);
     }
 
