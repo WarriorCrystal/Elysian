@@ -11,6 +11,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.math.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class EntityUtil implements Minecraftable
@@ -31,6 +33,27 @@ public class EntityUtil implements Minecraftable
             return speed * 20.0;
         }
         return 0.0;
+    }
+
+    public static List<BlockPos> getSphere(BlockPos loc, float radius, int height, boolean hollow, boolean sphere, int plus_y) {
+        List<BlockPos> circleBlocks = new ArrayList<>();
+        int locX = loc.getX();
+        int locY = loc.getY();
+        int locZ = loc.getZ();
+
+        for (int x = locX - (int) radius; x <= locX + radius; x++) {
+            for (int z = locZ - (int) radius; z <= locZ + radius; z++) {
+                for (int y = (sphere ? locY - (int) radius : locY); y < (sphere ? locY + radius : locY + height); y++) {
+                    double dist = (locX - x) * (locX - x) + (locZ - z) * (locZ - z) + (sphere ? (locY - y) * (locY - y) : 0);
+                    if (dist < radius * radius && !(hollow && dist < (radius - 1) * (radius - 1))) {
+                        BlockPos l = new BlockPos(x, y + plus_y, z);
+                        circleBlocks.add(l);
+                    }
+                }
+            }
+        }
+
+        return circleBlocks;
     }
 
     public static void moveEntityStrafe(double speed, Entity entity) {

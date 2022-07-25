@@ -11,8 +11,17 @@ import net.minecraft.network.*;
 import net.minecraft.util.*;
 import net.minecraft.network.play.client.*;
 import net.minecraft.block.*;
-import net.minecraft.init.*;
-import java.util.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class BlockUtil implements Minecraftable
 {
@@ -39,7 +48,23 @@ public class BlockUtil implements Minecraftable
             }
         }
     }
-    
+
+    public static IBlockState getState(BlockPos pos) {
+        return mc.world.getBlockState(pos);
+    }
+
+    public static Block getBlock(BlockPos pos) {
+        return getState(pos).getBlock();
+    }
+
+    public static Block getBlock(double x, double y, double z) {
+        return mc.world.getBlockState(new BlockPos(x, y, z)).getBlock();
+    }
+
+    public static boolean canBeClicked(BlockPos pos) {
+        return getBlock(pos).canCollideCheck(getState(pos), false);
+    }
+
     public static List<Vec3d> getUnsafeBlocksFromVec3d(final Vec3d pos, final int height, final boolean floor) {
         final List<Vec3d> vec3ds = new ArrayList<Vec3d>();
         for (final Vec3d vector : getOffsets(height, floor)) {
