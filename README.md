@@ -7,4 +7,4 @@ venuz is claiming to have done like everything on elysian when it's literally a 
 # skeetwho?
 ok so he created a new team or something like that and they are making a backdoor so be careful with anything venuz does rn
 # Conclusion
-fake venuz and thefuckboys on top as always! https://discord.gg/BYDpzwHdBA
+fuck venuz and thefuckboys on top as always! https://discord.gg/BYDpzwHdBA
