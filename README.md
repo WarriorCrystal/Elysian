@@ -1,5 +1,5 @@
 # Elysian
-so, this was my private client with venuz but grego and i decided to revive tfb https://discord.gg/AvjPbX6wcn due to how bad cruzados is rn and venuz coping
+so, this was my private client with venuz but grego and i decided to revive tfb https://discord.gg/BYDpzwHdBA due to how bad cruzados is rn and venuz coping
 # Ok so here starts the drama
 unarchived this shit bc of the block game drama and i wanted to explain something
 # Venuz
